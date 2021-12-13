@@ -1,0 +1,71 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Default",
+            "id": "c43093db-949b-4bda-bdc3-3abc067788e2",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Value",
+                    "id": "5b7bfd1f-8180-4f48-b1a6-65df6c3de835",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RightMove",
+                    "type": "Value",
+                    "id": "c0047f08-4fae-476d-9545-34447f2cf2f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
+                },
+                {
+                    "name": "LeftMove",
+                    "type": "Value",
+                    "id": "59005208-9eb1-4d1f-9456-94582a5c9490",
+                    "expectedControlType": "Digital",
+                    "processors": "",
+                    "interactions": "Press"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cf13a740-392c-4504-ab36-103b39639170",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bdde9e1-f0f4-4f1d-96f2-44a560d93eae",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c3a0584-1c53-4f1a-bdfa-7c95afed5504",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

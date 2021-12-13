@@ -13,16 +13,14 @@ public class Movement2D : MonoBehaviour
     Rigidbody2D rb;
 
     Vector2 direction;
-    Vector2 zeroDirection;
-
-    Vector2 jumpDirection;
 
     public float speed = 1f;
 
     public float jumpHeight = 10f;
 
     bool inAir = false;
-    bool isJumping = false;
+    bool rightMoving = false;
+    bool leftMoving = false;
 
 
     // Start is called before the first frame update
@@ -34,18 +32,35 @@ public class Movement2D : MonoBehaviour
 
     void Start()
     {
-        zeroDirection = new Vector2(0,0);
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnMove(InputValue value)
+    private void OnRightMove(InputValue value)
     {
-        //Debug.Log("MoveInput");
-        direction.x = value.Get<Vector2>().x;
 
-        
+        if (value.Get<float>() > 0f)
+        {
+            Debug.Log("pressed");
+        }
+        if (value.Get<float>() == 0f)
+        {
+            Debug.Log("released");
+        }
 
-        //direction.y = value.Get<Vector2>().y;
+    }
+
+    private void OnLeftMove(InputValue value) 
+    {
+
+        if (value.Get<float>() > 0f)
+        {
+            Debug.Log("pressed");
+        }
+        if (value.Get<float>() == 0f)
+        {
+            Debug.Log("released");
+        }
+
 
     }
 
@@ -65,12 +80,9 @@ public class Movement2D : MonoBehaviour
         
         if (inAir == false)
         {
-            //Debug.Log("NowInAir");
-            //direction.y = 1;
-            ////rb.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-            //rb.velocity += direction * 10f;
 
-            rb.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
+
+            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
             inAir = true;
         }
 
@@ -81,36 +93,26 @@ public class Movement2D : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Ground")) //if on ground, know that we arent jumping or in air
+        if (other.gameObject.CompareTag("Ground")) //if on ground, know that we arent jumping or in air
         {
-            isJumping = false;
             inAir = false;
         }
-
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //cap speed
-        //slowdown to stop  
-        //jump\     
+        if (rightMoving == true)
+        {
+            rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+        }
 
-        //while (isJumping)
-        //{
-        //
-        //}
-
-        //Debug.Log("VelocityChange");
-        
-        //rb.velocity = direction * speed;
-
-
-
-
-
+        if (leftMoving == true)
+        {
+            rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+        }
     }
 }
