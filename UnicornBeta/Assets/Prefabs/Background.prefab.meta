@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:UnicornBeta/Assets/Prefabs/Background.prefab.meta
 guid: 1c905cff94debe74d895dbfface92c31
 PrefabImporter:
+=======
+guid: ac8a39e6207d7e84ea4879b6464e99aa
+NativeFormatImporter:
+>>>>>>> ProgrammingBranch:UnicornBeta/Assets/Scripts/Enemy/FlyingEnemyScripts/Flyer.controller.meta
   externalObjects: {}
+  mainObjectFileID: 9100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
