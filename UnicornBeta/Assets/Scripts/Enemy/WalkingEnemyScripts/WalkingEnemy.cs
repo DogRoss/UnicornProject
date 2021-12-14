@@ -9,9 +9,7 @@ public class WalkingEnemy : MonoBehaviour
     Vector2 direction;
     public bool isFacingRight;
     public float speed = 100;
-    public int currentEnemyHealth = 1;
-    bool damaged;
-    bool isDead;
+
 
 
 
@@ -20,15 +18,6 @@ public class WalkingEnemy : MonoBehaviour
     {
         direction *= -1;
 
-    }
-    public void TakeDamage(int damage)
-    {
-        damaged = true;
-        currentEnemyHealth -= damage;
-        if (currentEnemyHealth <= 0)
-        {
-            isDead = true;
-        }
     }
     void Start()
     {
@@ -45,14 +34,7 @@ public class WalkingEnemy : MonoBehaviour
     }
     private void Update()
     {
-        damaged = false;
-        if(isDead == true)
-        {
-            //this.gameObject.SetActive(false);
 
-
-            Destroy(gameObject);
-        }
     }
 
     void FixedUpdate()
@@ -69,9 +51,5 @@ public class WalkingEnemy : MonoBehaviour
         //{
         //    SwitchDirection();
         //}
-        if (collision.collider.CompareTag("PlayerDamage"))
-        {
-            TakeDamage(currentEnemyHealth);
-        }
     }
 }
