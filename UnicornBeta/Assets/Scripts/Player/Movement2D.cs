@@ -1,116 +1,99 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 
 
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Movement2D : MonoBehaviour
 {
 
     Rigidbody2D rb;
 
     Vector2 direction;
-    Vector2 zeroDirection;
 
-    Vector2 jumpDirection;
+    Animator anim;
+    SpriteRenderer rend;
 
-    public float speed = 1f;
+    public float speed = .1f;
 
     public float jumpHeight = 10f;
 
     bool inAir = false;
-    bool isJumping = false;
-
-
-    // Start is called before the first frame update
-    //private void Start()
-    //{
-    //    
-    //
-    //}
+    bool rightMoving = false;
+    bool leftMoving = false;
 
     void Start()
     {
-        zeroDirection = new Vector2(0,0);
+        direction = new Vector2(0, 0);
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
     }
 
     private void OnMove(InputValue value)
     {
-        //Debug.Log("MoveInput");
-        direction.x = value.Get<Vector2>().x;
-
-        
-
-        //direction.y = value.Get<Vector2>().y;
-
+        direction.x = value.Get<float>();
+        anim.SetBool("isMoving", true);
     }
 
     private void OnJump(InputValue value)
     {
         Debug.Log("Jump");
 
-        /*
-        if (value.Get<int>() > 0)
-        {
-            Debug.Log("JumpInitPress");
-        }
-        if(value.Get<int>() == 0)
-        {
-            Debug.Log("JumpReleasePress");
-        }*/
-        
         if (inAir == false)
         {
-            //Debug.Log("NowInAir");
-            //direction.y = 1;
-            ////rb.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-            //rb.velocity += direction * 10f;
-
-            rb.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0, 1 * jumpHeight), ForceMode2D.Impulse);
             inAir = true;
         }
 
-
-        //rb.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
-
-
-
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnAttack()
     {
-        if (other.CompareTag("Ground")) //if on ground, know that we arent jumping or in air
+        anim.SetTrigger("isAttacking");
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground")) //if on ground, know that we arent jumping or in air
         {
-            isJumping = false;
             inAir = false;
         }
+    }
 
+    private void Update()
+    {
+        if (direction.x < 0)
+        {
+            Vector3 newScale = transform.localScale;
+            newScale.x = -1;
+            transform.localScale = newScale;
+        }
+        if (direction.x > 0)
+        {
+            Vector3 newScale = transform.localScale;
+            newScale.x = 1;
+            transform.localScale = newScale;
+        }
+
+
+        if (Mathf.Abs(direction.x) == 0)
+        {
+            anim.SetBool("isMoving", false);
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
-        //cap speed
-        //slowdown to stop  
-        //jump\     
-
-        //while (isJumping)
-        //{
-        //
-        //}
-
-        //Debug.Log("VelocityChange");
-        
-        //rb.velocity = direction * speed;
-
-
-
-
-
+        float vertical = rb.velocity.y;
+        float horizontal = direction.x * speed;
+        rb.velocity = new Vector2(horizontal, vertical);
     }
 }
