@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Animations;
 
 
 
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class Movement2D : MonoBehaviour
 {
 
@@ -14,7 +16,10 @@ public class Movement2D : MonoBehaviour
 
     Vector2 direction;
 
-    public float speed = 1f;
+    Animator anim;
+    SpriteRenderer rend;
+
+    public float speed = .1f;
 
     public float jumpHeight = 10f;
 
@@ -22,75 +27,34 @@ public class Movement2D : MonoBehaviour
     bool rightMoving = false;
     bool leftMoving = false;
 
-
-    // Start is called before the first frame update
-    //private void Start()
-    //{
-    //    
-    //
-    //}
-
     void Start()
     {
+        direction = new Vector2(0, 0);
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        rend = GetComponent<SpriteRenderer>();
     }
 
-    private void OnRightMove(InputValue value)
+    private void OnMove(InputValue value)
     {
-
-        if (value.Get<float>() > 0f)
-        {
-            Debug.Log("pressed");
-        }
-        if (value.Get<float>() == 0f)
-        {
-            Debug.Log("released");
-        }
-
-    }
-
-    private void OnLeftMove(InputValue value) 
-    {
-
-        if (value.Get<float>() > 0f)
-        {
-            Debug.Log("pressed");
-        }
-        if (value.Get<float>() == 0f)
-        {
-            Debug.Log("released");
-        }
-
-
+        direction.x = value.Get<float>();
     }
 
     private void OnJump(InputValue value)
     {
         Debug.Log("Jump");
 
-        /*
-        if (value.Get<int>() > 0)
-        {
-            Debug.Log("JumpInitPress");
-        }
-        if(value.Get<int>() == 0)
-        {
-            Debug.Log("JumpReleasePress");
-        }*/
-        
         if (inAir == false)
         {
-
-
-            rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
-            inAir = true;
+            rb.AddForce(new Vector2(0, 1 * jumpHeight), ForceMode2D.Impulse);
+            inAir = true;   
         }
 
+    }
 
-        //rb.AddForce(Vector2.up * 20, ForceMode2D.Impulse);
-
-
-
+    private void OnAttack()
+    {
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -101,18 +65,36 @@ public class Movement2D : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
-        if (rightMoving == true)
+        if (direction.x < 0)
         {
-            rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+            Vector3 newScale = transform.localScale;
+            newScale.x = -1;
+            transform.localScale = newScale;
+        }
+        if (direction.x > 0)
+        {
+            Vector3 newScale = transform.localScale;
+            newScale.x = 1;
+            transform.localScale = newScale;
         }
 
-        if (leftMoving == true)
+        if(Mathf.Abs(direction.x) > 0)
         {
-            rb.AddForce(Vector2.right * speed, ForceMode2D.Impulse);
+            anim.SetBool("IsMoving", true);
         }
+        else if(Mathf.Abs(direction.x) == 0)
+        {
+            anim.SetBool("IsMoving", false);
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        float vertical = rb.velocity.y;
+        float horizontal = direction.x * speed;
+        rb.velocity = new Vector2(horizontal, vertical);
     }
 }
