@@ -9,6 +9,11 @@ public class WalkingEnemySpawner : MonoBehaviour
     public float startSpawnTime;
     public Transform[] spawnLocation;
 
+    public void Start()
+    {
+        StartEnemySpawn();
+    }
+
     [ContextMenu("SpawnEnemies")]
     public void StartEnemySpawn() //calling the Coroutine
     {
