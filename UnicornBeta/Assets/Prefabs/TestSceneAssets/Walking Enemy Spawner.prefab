@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6627644606689326923}
   - component: {fileID: 6627644606689326922}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: Walking Enemy Spawner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
