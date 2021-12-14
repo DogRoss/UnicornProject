@@ -94,13 +94,6 @@ public class Movement2D : MonoBehaviour
     {
         float vertical = rb.velocity.y;
         float horizontal = direction.x * speed;
-        Vector2 force = new Vector2(horizontal, vertical);
-
-        if (Mathf.Abs(direction.x) > 0f)
-        {
-            rb.velocity = new Vector2(horizontal, vertical);
-        }
-
+        rb.velocity = new Vector2(horizontal, vertical);
     }
-
 }
