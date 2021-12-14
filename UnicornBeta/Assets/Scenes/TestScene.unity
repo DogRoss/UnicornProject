@@ -376,7 +376,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 596608170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59965cff8035f7941afce823deb40e87, type: 3}
+  m_Script: {fileID: 11500000, guid: d76fa3ab403456744be87392ae7f4b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isFacingRight: 0
@@ -943,16 +943,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2086328475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e08e077011b7554d998501520d698c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 389fd8cbff0ffcc4dbb8b6020ab61e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Object:
-  - {fileID: 596608170}
-  - {fileID: 596608170}
-  - {fileID: 596608170}
-  - {fileID: 596608170}
-  - {fileID: 596608170}
-  - {fileID: 596608170}
+  - {fileID: 2078323115038873296, guid: 99f6dc2b21fadbd4f92e2220715cfec5, type: 3}
+  - {fileID: 2078323115038873296, guid: 99f6dc2b21fadbd4f92e2220715cfec5, type: 3}
+  - {fileID: 2078323115038873296, guid: 99f6dc2b21fadbd4f92e2220715cfec5, type: 3}
+  - {fileID: 2078323115038873296, guid: 99f6dc2b21fadbd4f92e2220715cfec5, type: 3}
+  - {fileID: 2078323115038873296, guid: 99f6dc2b21fadbd4f92e2220715cfec5, type: 3}
+  - {fileID: 2078323115038873296, guid: 99f6dc2b21fadbd4f92e2220715cfec5, type: 3}
   spawnTime: 10
   startSpawnTime: 2
   spawnLocation:
