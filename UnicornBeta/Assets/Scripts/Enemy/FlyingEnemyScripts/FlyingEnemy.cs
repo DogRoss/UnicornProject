@@ -8,7 +8,23 @@ public class FlyingEnemy : MonoBehaviour
     Vector2 direction;
     public bool isFacingRight;
     public float speed;
+    int currentEnemyHealth;
+    bool damaged;
+    bool isDead;
 
+    private void Awake()
+    {
+        currentEnemyHealth = 20;
+    }
+    public void TakeDamage(int damage)
+    {
+        damaged = true;
+        currentEnemyHealth -= damage;
+        if (currentEnemyHealth <= 0)
+        {
+            isDead = true;
+        }
+    }
     public void SwitchDirection()
     {
             direction = Vector2.Reflect(direction, Vector2.up);
@@ -21,6 +37,16 @@ public class FlyingEnemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         direction = new Vector2(1, -1).normalized;
+    }
+    private void Update()
+    {
+        damaged = false;
+        if (isDead == true)
+        {
+            this.gameObject.SetActive(false);
+
+            //Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()
@@ -41,5 +67,13 @@ public class FlyingEnemy : MonoBehaviour
         {
             SwitchDirection();
         }
+        if (collision.collider.CompareTag("PlayerDamage"))
+        {
+            TakeDamage(currentEnemyHealth);
+        }
+        //if (collision.collider.CompareTag("Player"))
+        //{
+        //    SwitchDirectionWall();
+        //}
     }
 }

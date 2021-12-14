@@ -38,6 +38,7 @@ public class Movement2D : MonoBehaviour
     private void OnMove(InputValue value)
     {
         direction.x = value.Get<float>();
+        anim.SetBool("isMoving", true);
     }
 
     private void OnJump(InputValue value)
@@ -47,14 +48,14 @@ public class Movement2D : MonoBehaviour
         if (inAir == false)
         {
             rb.AddForce(new Vector2(0, 1 * jumpHeight), ForceMode2D.Impulse);
-            inAir = true;   
+            inAir = true;
         }
 
     }
 
     private void OnAttack()
     {
-        
+        anim.SetTrigger("isAttacking");
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -80,13 +81,10 @@ public class Movement2D : MonoBehaviour
             transform.localScale = newScale;
         }
 
-        if(Mathf.Abs(direction.x) > 0)
+
+        if (Mathf.Abs(direction.x) == 0)
         {
-            anim.SetBool("IsMoving", true);
-        }
-        else if(Mathf.Abs(direction.x) == 0)
-        {
-            anim.SetBool("IsMoving", false);
+            anim.SetBool("isMoving", false);
         }
     }
 

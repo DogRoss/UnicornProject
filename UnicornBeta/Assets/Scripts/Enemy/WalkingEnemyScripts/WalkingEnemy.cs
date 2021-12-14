@@ -4,16 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WalkingEnemy : MonoBehaviour
-{
+{ 
     Rigidbody2D rb;
     Vector2 direction;
     public bool isFacingRight;
-    public float speed;
+    public float speed = 100;
+    public int currentEnemyHealth = 1;
+    bool damaged;
+    bool isDead;
 
+
+
+    
     public void SwitchDirection()
     {
         direction *= -1;
 
+    }
+    public void TakeDamage(int damage)
+    {
+        damaged = true;
+        currentEnemyHealth -= damage;
+        if (currentEnemyHealth <= 0)
+        {
+            isDead = true;
+        }
     }
     void Start()
     {
@@ -28,6 +43,17 @@ public class WalkingEnemy : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
     }
+    private void Update()
+    {
+        damaged = false;
+        if(isDead == true)
+        {
+            this.gameObject.SetActive(false);
+
+
+            //Destroy(gameObject);
+        }
+    }
 
     void FixedUpdate()
     {
@@ -39,6 +65,13 @@ public class WalkingEnemy : MonoBehaviour
         {
             SwitchDirection();
         }
-
+        //if (collision.collider.CompareTag("Player"))
+        //{
+        //    SwitchDirection();
+        //}
+        if (collision.collider.CompareTag("PlayerDamage"))
+        {
+            TakeDamage(currentEnemyHealth);
+        }
     }
 }

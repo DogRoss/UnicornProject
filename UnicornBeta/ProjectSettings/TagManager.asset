@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Wall
   - Ceiling
+  - PlayerDamage
   layers:
   - Default
   - TransparentFX
