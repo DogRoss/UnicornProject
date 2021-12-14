@@ -48,10 +48,10 @@ public class WalkingEnemy : MonoBehaviour
         damaged = false;
         if(isDead == true)
         {
-            this.gameObject.SetActive(false);
+            //this.gameObject.SetActive(false);
 
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
