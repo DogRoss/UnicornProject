@@ -72,13 +72,13 @@ public class Movement2D : MonoBehaviour
         if (direction.x < 0)
         {
             Vector3 newScale = transform.localScale;
-            newScale.x = -1;
+            newScale.x = -Mathf.Abs(transform.localScale.x);
             transform.localScale = newScale;
         }
         if (direction.x > 0)
         {
             Vector3 newScale = transform.localScale;
-            newScale.x = 1;
+            newScale.x = Mathf.Abs(transform.localScale.x);
             transform.localScale = newScale;
         }
 

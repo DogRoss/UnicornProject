@@ -759,6 +759,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 7662353026583826691, guid: 864b3103b3ea1f0428aaca290cbc9d5d, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2059832
+      objectReference: {fileID: 0}
+    - target: {fileID: 7662353026583826691, guid: 864b3103b3ea1f0428aaca290cbc9d5d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.10299158
+      objectReference: {fileID: 0}
     - target: {fileID: 8080018446150717997, guid: 864b3103b3ea1f0428aaca290cbc9d5d, type: 3}
       propertyPath: m_RootOrder
       value: 2
