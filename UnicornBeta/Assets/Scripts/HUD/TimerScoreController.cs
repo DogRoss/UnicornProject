@@ -14,9 +14,25 @@ public class TimerScoreController : MonoBehaviour
 
     //public PlayerEventController playerEventController;
 
-    int playerScore = 0;
+    public int playerScore = 0;
 
     public static bool GameIsRunning = true;
+
+    void Start()
+    {
+        Debug.Log("Awoke");
+        
+        timerText.gameObject.SetActive(true);
+        scoreText.gameObject.SetActive(true);
+
+        if (restartButton.activeSelf == true)
+        {
+            restartButton.SetActive(false);
+        }
+        
+        loseText.SetActive(false);
+        winText.SetActive(false);
+    }
 
     private void Update()
     {
@@ -29,6 +45,9 @@ public class TimerScoreController : MonoBehaviour
                 GameIsRunning = false;
                 loseText.SetActive(true);
                 restartButton.SetActive(true);
+
+                timerText.gameObject.SetActive(false);
+                scoreText.gameObject.SetActive(false);
             }
         }
 

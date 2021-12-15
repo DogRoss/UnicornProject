@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+
+    public TimerScoreController controller;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
+            controller.playerScore++;
             other.gameObject.SetActive(false);
         }
     }

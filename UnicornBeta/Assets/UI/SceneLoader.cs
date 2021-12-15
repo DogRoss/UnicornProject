@@ -11,11 +11,11 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void LoadStartScreen()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }

@@ -11,8 +11,6 @@ public class WalkingEnemy : MonoBehaviour
     public float speed = 100;
 
 
-
-
     
     public void SwitchDirection()
     {

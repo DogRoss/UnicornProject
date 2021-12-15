@@ -28,6 +28,8 @@ public class Movement2D : MonoBehaviour
     bool rightMoving = false;
     bool leftMoving = false;
 
+    public bool canControl = true;
+
     void Start()
     {
         direction = new Vector2(0, 0);
@@ -38,25 +40,34 @@ public class Movement2D : MonoBehaviour
 
     private void OnMove(InputValue value)
     {
-        direction.x = value.Get<float>();
-        anim.SetBool("isMoving", true);
+        if (canControl)
+        {
+            direction.x = value.Get<float>();
+            anim.SetBool("isMoving", true);
+        }
+        
     }
 
     private void OnJump(InputValue value)
     {
-        Debug.Log("Jump");
-
-        if (inAir == false)
+        if (canControl)
         {
-            rb.AddForce(new Vector2(0, 1 * jumpHeight), ForceMode2D.Impulse);
-            inAir = true;
+            if (inAir == false)
+            {
+                rb.AddForce(new Vector2(0, 1 * jumpHeight), ForceMode2D.Impulse);
+                inAir = true;
+            }
         }
 
     }
 
     private void OnAttack()
     {
-        anim.SetTrigger("isAttacking");
+        if (canControl)
+        {
+            anim.SetTrigger("isAttacking");
+        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D other)

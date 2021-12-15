@@ -19,6 +19,7 @@ public class PlayerEventController : MonoBehaviour
 
     private void Start()
     {
+        isDead = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         currentHealth = maxHealth;
@@ -27,7 +28,7 @@ public class PlayerEventController : MonoBehaviour
     
     private void TakeDamage()
     {
-        Debug.Log("takeDamage");
+        anim.SetTrigger("Damage");
 
         currentHealth -= 1;
         healthBar.SetHealth(currentHealth);
@@ -39,13 +40,18 @@ public class PlayerEventController : MonoBehaviour
 
     public void Update()
     {
-        if(isDead == true)
+        if(currentHealth <= 0)
         {
-            anim.SetBool("isDying", true);
+            anim.SetBool("isDead", true);
         }
         
     }
     
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("enterCollide");
