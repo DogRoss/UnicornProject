@@ -31,7 +31,7 @@ public class FlyingEnemySpawner : MonoBehaviour
                 GO.GetComponent<FlyingEnemy>().SwitchDirection();
             }
             yield return new WaitForSeconds(spawnTime); //having a time value for when the next enemy spawns
-            spawnTime /= 2; //decreasing the time between spanws
+            spawnTime /= 1.25f; //decreasing the time between spanws
         }
     }
 }
