@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFacingRight: 0
   speed: 100
+  isMoving: 1
 --- !u!61 &2843439609872625995
 BoxCollider2D:
   m_ObjectHideFlags: 0

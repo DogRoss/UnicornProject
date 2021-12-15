@@ -8,6 +8,7 @@ public class FlyingEnemy : MonoBehaviour
     Vector2 direction;
     public bool isFacingRight;
     public float speed;
+    
 
 
 
@@ -31,7 +32,15 @@ public class FlyingEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = direction * speed * Time.deltaTime;
+        if (TimerScoreController.GameIsRunning == true)
+        {
+            rb.velocity = direction * speed * Time.deltaTime;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

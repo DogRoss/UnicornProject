@@ -11,7 +11,7 @@ public class PlayerEventController : MonoBehaviour
     public int maxHealth = 10;
     public float launchSpeed = 10f;
     public UIPlayerHealth healthBar;
-    bool isDead;
+    public static bool isDead;
 
     Rigidbody2D rb;
 
@@ -24,6 +24,7 @@ public class PlayerEventController : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    
     private void TakeDamage()
     {
         Debug.Log("takeDamage");

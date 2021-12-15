@@ -21,17 +21,20 @@ public class WalkingEnemySpawner : MonoBehaviour
     }
     IEnumerator EnemySpawn()
     {
-        float tempSpawnTime = spawnTime;
-        yield return new WaitForSeconds(startSpawnTime); //putting a time value until enemies start to spawn
-        for (int i = 0; i < Object.Length; i++)
+        if (TimerScoreController.GameIsRunning != false)
         {
-            GameObject GO = Instantiate(Object[i], spawnLocation[i % 2].position, Quaternion.identity); //setting the spawn locations on both sides
-            if ((i % 2) == 1)
+            float tempSpawnTime = spawnTime;
+            yield return new WaitForSeconds(startSpawnTime); //putting a time value until enemies start to spawn
+            for (int i = 0; i < Object.Length; i++)
             {
-                GO.GetComponent<WalkingEnemy>().SwitchDirection();
+                GameObject GO = Instantiate(Object[i], spawnLocation[i % 2].position, Quaternion.identity); //setting the spawn locations on both sides
+                if ((i % 2) == 1)
+                {
+                    GO.GetComponent<WalkingEnemy>().SwitchDirection();
+                }
+                yield return new WaitForSeconds(spawnTime); //having a time value for when the next enemy spawns
+                spawnTime /= 2; //decreasing the time between spanws
             }
-            yield return new WaitForSeconds(spawnTime); //having a time value for when the next enemy spawns
-            spawnTime /= 2; //decreasing the time between spanws
         }
     }
 }

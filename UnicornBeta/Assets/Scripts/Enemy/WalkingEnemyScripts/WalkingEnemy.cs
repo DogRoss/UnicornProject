@@ -39,7 +39,14 @@ public class WalkingEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = direction * speed * Time.deltaTime;
+        if (TimerScoreController.GameIsRunning == true)
+        {
+            rb.velocity = direction * speed * Time.deltaTime;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
