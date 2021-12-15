@@ -63,7 +63,22 @@ public class Movement2D : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground")) //if on ground, know that we arent jumping or in air
         {
+            
             inAir = false;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground"))
+        {
+            if (Mathf.Abs(direction.x) == 0f)
+            {
+                float vertical = rb.velocity.y / 2f;
+                float horizontal = rb.velocity.x / 2f;
+                rb.velocity = new Vector2(horizontal, vertical);
+
+            }
         }
     }
 
@@ -94,6 +109,11 @@ public class Movement2D : MonoBehaviour
     {
         float vertical = rb.velocity.y;
         float horizontal = direction.x * speed;
-        rb.velocity = new Vector2(horizontal, vertical);
+
+        if (Mathf.Abs(direction.x) > 0f)
+        {
+            rb.velocity = new Vector2(horizontal, vertical);
+        }
+        
     }
 }

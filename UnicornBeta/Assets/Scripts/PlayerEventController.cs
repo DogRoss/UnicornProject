@@ -48,7 +48,7 @@ public class PlayerEventController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("enterCollide");
-        if (collision.collider.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("collidedEnemy");
             if(collision.transform.position.x > transform.position.x)
@@ -57,7 +57,7 @@ public class PlayerEventController : MonoBehaviour
                 rb.AddForce(upLeft, ForceMode2D.Impulse);
             }
             if (collision.transform.position.x < transform.position.x)
-            { //launch up-left
+            { //launch up-right
                 Vector2 upRight = new Vector2(launchSpeed, launchSpeed);
                 rb.AddForce(upRight, ForceMode2D.Impulse);
             }
